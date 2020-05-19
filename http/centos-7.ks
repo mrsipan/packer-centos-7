@@ -1,5 +1,5 @@
 auth --enableshadow --passalgo=sha512
-bootloader --location=mbr --append="crashkernel=auto rhgb quiet"
+bootloader --location=mbr --append="console=ttyS0 crashkernel=auto rhgb quiet audit=1"
 zerombr
 text
 firewall --disable
@@ -12,11 +12,13 @@ timezone UTC
 install
 network --bootproto=dhcp --onboot=on --hostname=Unnamed
 reboot
-url --mirrorlist="http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=os"
-logging --level=info
+# url --mirrorlist="http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=os"
+cdrom
+logging --level=debug
 
 # set passwd
-rootpw --iscrypted $1$redhat$pRYx4oykDgtMyJUbXmnC2.
+## rootpw --iscrypted $1$redhat$pRYx4oykDgtMyJUbXmnC2.
+rootpw --iscrypted $68ygBZjWMe1Y
 
 # partition code
 clearpart --all --initlabel
