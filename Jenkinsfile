@@ -2,13 +2,17 @@ pipeline {
 
     agent any
 
-    stages 'Build image' {
+    environment {
+        PACKER_LOG = "1"
+    }
 
-        steps {
+    stages {
 
-            sh 'PACKER_LOG=1 packer build main.json'
-
+        stage 'Build image' {
+            steps {
+                sh 'packer build main.json'
+            }
         }
-
     }
 }
+
