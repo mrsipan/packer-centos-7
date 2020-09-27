@@ -8,7 +8,7 @@ pipeline {
 
     stages {
 
-        stage 'Build image' {
+        stage('Build image') {
             steps {
                 sh 'packer build main.json'
             }
