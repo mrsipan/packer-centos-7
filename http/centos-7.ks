@@ -6,7 +6,7 @@ firewall --disable
 firstboot --disable
 keyboard us
 lang en_US
-selinux --disabled
+selinux --enforcing
 skipx
 timezone UTC
 install
@@ -17,8 +17,7 @@ cdrom
 logging --level=debug
 
 # set passwd
-## rootpw --iscrypted $1$redhat$pRYx4oykDgtMyJUbXmnC2.
-rootpw --iscrypted $68ygBZjWMe1Y
+rootpw --iscrypted $6$inmortal$v18Pp2PNcZOC9msbh3otgolrZdX6HkSAV9FBEMqLMRc4lYf93hOe4I3JYE6DhPAWmKJ.ULlvei7IsOl7hD.dr/
 
 # partition code
 clearpart --all --initlabel
@@ -100,4 +99,3 @@ Host *
 EOF
 
 %end #%post
-
