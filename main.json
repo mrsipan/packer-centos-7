@@ -2,7 +2,7 @@
     "variables": {
         "format": "raw",
         "ssh-password": "passwd",
-        "disk-size": "1024"
+        "disk-size": "2048"
     },
     "builders": [
         {
