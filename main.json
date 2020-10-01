@@ -2,7 +2,8 @@
     "variables": {
         "format": "raw",
         "ssh-password": "passwd",
-        "disk-size": "2048"
+        "disk-size": "2048",
+        "qemu-serial": "/tmp/qemu-serial"
     },
     "builders": [
         {
@@ -34,7 +35,7 @@
                 ],
                 [
                     "-serial",
-                    "pipe:/tmp/qemu-serial"
+                    "pipe:/{{ user `qemu-serial` }}"
                 ],
                 [
                     "-net",

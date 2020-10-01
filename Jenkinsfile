@@ -1,3 +1,7 @@
+import java.nio.file.Files
+
+def tmpdir = Files.createTempDirectory()
+
 pipeline {
 
     agent any
@@ -25,7 +29,9 @@ pipeline {
 
             steps {
 
-                sh "packer build -var disk-size=${DISK_SIZE} -var ssh-password=${SSH_PASSWORD} main.json"
+                sh "mkfifo ${tmpdir}/qemu-serial.in ${tmpdir}/qemu-serial.out"
+
+                sh "packer build -var qemu-serial=${tmpdir}/qemu-serial -var disk-size=${DISK_SIZE} -var ssh-password=${SSH_PASSWORD} main.json"
 
             }
 
