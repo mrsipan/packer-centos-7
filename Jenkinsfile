@@ -1,6 +1,6 @@
 import java.nio.file.Files
 
-def tmpdir = Files.createTempDirectory()
+def tmpdir = Files.createTempDirectory('jenkins')
 
 pipeline {
 
