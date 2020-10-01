@@ -1,6 +1,12 @@
 import java.nio.file.Files
 
-def tmpdir = Files.createTempDirectory('jenkins')
+
+@com.cloudbees.groovy.cps.NonCPS
+String gettmpdir() {
+    Files.createTempDirectory('jenkins')
+}
+
+String tmpdir = gettmpdir()
 
 pipeline {
 
