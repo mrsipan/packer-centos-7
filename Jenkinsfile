@@ -25,8 +25,6 @@ pipeline {
 
             steps {
 
-                tmpfile = File.createTempFile()
-
                 sh "packer build -var disk-size=${DISK_SIZE} -var ssh-password=${SSH_PASSWORD} main.json"
 
             }
