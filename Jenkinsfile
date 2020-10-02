@@ -1,6 +1,5 @@
 import java.nio.file.Files
 
-
 @com.cloudbees.groovy.cps.NonCPS
 String gettmpdir() {
     Files.createTempDirectory('jenkins')
@@ -40,7 +39,6 @@ pipeline {
                 sh "packer build -var qemu-serial=${tmpdir}/qemu-serial -var disk-size=${DISK_SIZE} -var ssh-password=${SSH_PASSWORD} main.json"
 
             }
-
         }
     }
 }
