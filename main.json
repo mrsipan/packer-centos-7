@@ -1,52 +1,59 @@
 {
-    "variables": {
-        "format": "raw",
-        "ssh-password": "passwd",
-        "disk-size": "2048",
-        "qemu-serial": "/tmp/qemu-serial"
-    },
-    "builders": [
-        {
-            "accelerator": "hvf",
-            "boot_command": [
-                "<tab> console=ttyS0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7.ks<enter><wait>"
-            ],
-            "boot_wait": "10s",
-            "disk_interface": "virtio",
-            "disk_size": "{{ user `disk-size` }}",
-            "format": "{{ user `format` }}",
-            "http_directory": "http",
-            "iso_checksum": "659691c28a0e672558b003d223f83938f254b39875ee7559d1a4a14c79173193",
-            "iso_checksum_type": "sha256",
-            "iso_url": "http://mirror.cs.vt.edu/pub/CentOS/7/isos/x86_64/CentOS-7-x86_64-Minimal-2003.iso",
-            "net_device": "virtio-net",
-            "output_directory": "build",
-            "shutdown_command": "systemctl poweroff",
-            "ssh_password": "{{ user `ssh-password` }}",
-            "ssh_timeout": "120m",
-            "ssh_username": "root",
-            "type": "qemu",
-            "vm_name": "centos-7-amd64-{{ timestamp }}.{{ user `format` }}",
-            "headless": true,
-            "qemuargs": [
-                [
-                    "-monitor",
-                    "unix:qemu-monitor.sock,server,nowait"
-                ],
-                [
-                    "-serial",
-                    "pipe:/{{ user `qemu-serial` }}"
-                ],
-                [
-                    "-net",
-                    "nic,model=virtio"
-                ],
-                [
-                    "-m",
-                    "896M"
-                ]
-            ]
-        }
-    ]
+  "variables": {
+    "format": "raw",
+    "ssh-password": "passwd",
+    "disk-size": "9216",
+    "qemu-serial": "/tmp/qemu-serial"
+  },
+  "builders": [
+    {
+      "accelerator": "hvf",
+      "boot_command": [
+        "<tab> console=ttyS0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7.ks<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_interface": "virtio",
+      "disk_size": "{{ user `disk-size` }}",
+      "format": "{{ user `format` }}",
+      "http_directory": "http",
+      "iso_checksum": "659691c28a0e672558b003d223f83938f254b39875ee7559d1a4a14c79173193",
+      "iso_checksum_type": "sha256",
+      "iso_url": "http://mirror.cs.vt.edu/pub/CentOS/7/isos/x86_64/CentOS-7-x86_64-Minimal-2003.iso",
+      "net_device": "virtio-net",
+      "output_directory": "build",
+      "shutdown_command": "systemctl poweroff",
+      "ssh_password": "passwd",
+      "ssh_timeout": "120m",
+      "ssh_username": "root",
+      "type": "qemu",
+      "vm_name": "centos-7-amd64-{{ timestamp }}.{{ user `format` }}",
+      "headless": true,
+      "qemuargs": [
+        [
+          "-monitor",
+          "unix:qemu-monitor.sock,server,nowait"
+        ],
+        [
+          "-serial",
+          "pipe:/{{ user `qemu-serial` }}"
+        ],
+        [
+          "-net",
+          "nic,model=virtio"
+        ],
+        [
+          "-m",
+          "896M"
+        ]
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "printf \"{{ user `ssh-password` }}\n%.0s\" `seq 2` | passwd"
+      ]
+    }
+  ]
 }
-

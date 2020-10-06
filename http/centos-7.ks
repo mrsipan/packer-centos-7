@@ -6,7 +6,7 @@ firewall --disable
 firstboot --disable
 keyboard us
 lang en_US
-selinux --enforcing
+selinux --permissive
 skipx
 timezone UTC
 install
